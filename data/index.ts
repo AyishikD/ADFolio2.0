@@ -50,7 +50,7 @@ export const gridItems = [
 
   {
     id: 5,
-    title: "Currently building a website to ease government facilities",
+    title: "Currently working on backend tech and looking for new challenges and ideas.",
     description: "The Insider News",
     className: "md:col-span-3 md:row-span-2",
     imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
@@ -109,9 +109,9 @@ export const projects = [
 export const workExperience = [
   {
     id: 1,
-    title: "Co-Founder and CP Lead",
-    company: "Resourcio Community [Dec 2022 - Present]",
-    desc: "Created and running a tech community with over 2000 members.",
+    title: "Web Developer Intern",
+    company: "GSI NEXT [Nov 2024 - Dec 2024]",
+    desc: "Created a register and login system using jwt tokens and MongoDB and hashed using bcrypt.Created a dynamic booking system in the backend based on Salon timings and Specialist timing.Created a dynamic Review system where it updates with input from each user.",
     className: "md:col-span-2",
     thumbnail: "/exp1.svg",
   },
@@ -128,14 +128,14 @@ export const workExperience = [
     title: "Software Engineering Virtual Experience",
     company: "JP MORGAN [Dec 2023]",
     desc: "Fixed broken files and used Perspective library to generate live graphs.",
-    className: "md:col-span-2", // change to md:col-span-2
+    className: "md:col-span-2", 
     thumbnail: "/exp3.svg",
   },
   {
     id: 4,
-    title: "Open Source Contributor",
-    company: "Github [Oct 2022 - Present]",
-    desc: "Contribute and mentor in different open source events like Hacktoberfest, GSSOC and Apertre.",
+    title: "Co-Founder and CP Lead",
+    company: "Resourcio Community [Dec 2022 - Present]",
+    desc: "Created and running a tech community with over 2000 members.",
     className: "md:col-span-2",
     thumbnail: "/exp4.svg",
   },

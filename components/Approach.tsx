@@ -18,7 +18,7 @@ const Approach = () => {
           des={`BACHELORS OF TECHNOLOGY IN 
             COMPUTER SCIENCE AND BUSINESS SYSTEM
             CGPA[UPTO 6TH SEM]: 8.22
-            OCT 2021-DEC 2025`}
+            OCT 2021-MAY 2025`}
     >
           <CanvasRevealEffect
             animationSpeed={5.1}
