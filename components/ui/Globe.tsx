@@ -92,11 +92,11 @@ export function Globe({ globeConfig, data }: WorldProps) {
   };
 
   useEffect(() => {
-    if (globeRef.current) {
-      _buildData();
-      _buildMaterial();
-    }
-  }, [globeRef.current]);
+  if (typeof document !== "undefined" && globeRef.current) {
+    _buildData();
+    _buildMaterial();
+  }
+}, [globeRef.current]);
 
   const _buildMaterial = () => {
     if (!globeRef.current) return;
@@ -149,7 +149,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
   };
 
   useEffect(() => {
-    if (globeRef.current && globeData) {
+    if (typeof document !== "undefined" && globeRef.current && globeData) {
       globeRef.current
         .hexPolygonsData(countries.features)
         .hexPolygonResolution(3)
@@ -203,7 +203,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
   };
 
   useEffect(() => {
-    if (!globeRef.current || !globeData) return;
+    if (typeof document !== "undefined" && !globeRef.current || !globeData) return;
 
     const interval = setInterval(() => {
       if (!globeRef.current || !globeData) return;
@@ -233,11 +233,13 @@ export function Globe({ globeConfig, data }: WorldProps) {
 export function WebGLRendererConfig() {
   const { gl, size } = useThree();
 
-  useEffect(() => {
+ useEffect(() => {
+  if (typeof document !== "undefined") {
     gl.setPixelRatio(window.devicePixelRatio);
     gl.setSize(size.width, size.height);
     gl.setClearColor(0xffaaff, 0);
-  }, []);
+  }
+}, [size.width, size.height, gl]);
 
   return null;
 }

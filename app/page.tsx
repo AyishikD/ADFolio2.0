@@ -32,12 +32,14 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+  if (typeof document !== "undefined") {
     // Simulate loading time, replace this with your actual data fetching logic
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 3000); // 6 seconds for 3 steps with 2 seconds duration each
     return () => clearTimeout(timeout);
-  }, []);
+  }
+}, []);
 
   return (
     <>

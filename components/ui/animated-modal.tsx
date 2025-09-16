@@ -70,18 +70,27 @@ export const ModalBody = ({
 }) => {
   const { open } = useModal();
 
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+   useEffect(() => {
+    if (typeof document !== "undefined") {
+      if (open) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
     }
   }, [open]);
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }
+  }, []);
 
   const modalRef = useRef(null);
   const { setOpen } = useModal();
   useOutsideClick(modalRef, () => setOpen(false));
-
   return (
     <AnimatePresence>
       {open && (
@@ -232,13 +241,17 @@ const CloseIcon = () => {
 function useOutsideClick(ref: any, callback: () => void) {
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (typeof document !== "undefined" && ref.current && !ref.current.contains(event.target)) {
         callback();
       }
     };
-    document.addEventListener("mousedown", handleClick);
+    if (typeof document !== "undefined") {
+      document.addEventListener("mousedown", handleClick);
+    }
     return () => {
-      document.removeEventListener("mousedown", handleClick);
+      if (typeof document !== "undefined") {
+        document.removeEventListener("mousedown", handleClick);
+      }
     };
   }, [ref, callback]);
 }

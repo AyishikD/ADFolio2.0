@@ -103,7 +103,7 @@ export const MultiStepLoader = ({
   const [currentState, setCurrentState] = useState(0);
 
   useEffect(() => {
-    if (!loading) {
+    if (typeof document !== "undefined" && !loading) {
       setCurrentState(0);
       return;
     }
