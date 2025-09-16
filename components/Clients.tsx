@@ -11,6 +11,7 @@ import {
   FaJava,
   FaDatabase,
   FaGitAlt,
+  FaLinux,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -25,6 +26,8 @@ import {
   SiC,
   SiCplusplus,
   SiShell,
+  SiRedis,
+  SiPostgresql,
 } from "react-icons/si";
 import { InfiniteMovingCards } from "./ui/InfiniteCards";
 
@@ -126,8 +129,23 @@ const techStack = [
   },
   {
     id: 20,
-    name: "REST API",
+    name: "REST API (Postman)",
     icon: <SiPostman />,
+  },
+  {
+    id: 21,
+    name: "Linux",
+    icon: <FaLinux />,
+  },
+  {
+    id: 22,
+    name: "Redis",
+    icon: <SiRedis />,
+  },
+  {
+    id: 23,
+    name: "PostgreSQL",
+    icon: <SiPostgresql />,
   },
 ];
 

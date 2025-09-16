@@ -17,7 +17,7 @@ const Approach = () => {
           icon={<AceternityIcon order="B.TECH" />}
           des={`BACHELORS OF TECHNOLOGY IN 
             COMPUTER SCIENCE AND BUSINESS SYSTEM
-            CGPA[UPTO 6TH SEM]: 8.22
+            CGPA[UPTO 7TH SEM]: 8.28
             OCT 2021-MAY 2025`}
     >
           <CanvasRevealEffect

@@ -1,4 +1,4 @@
-// src/pages/home.tsx or home.tsx
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -11,6 +11,8 @@ import Clients from "@/components/Clients";
 import Approach from "@/components/Approach";
 import Experience from "@/components/Experience";
 import RecentProjects from "@/components/RecentProjects";
+import Certificate from "@/components/Certificate";
+import Achievement from "@/components/Achievement";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import { MultiStepLoader as Loader } from "@/components/ui/multi-step-loader"; // Make sure the path is correct
 
@@ -49,6 +51,8 @@ const Home = () => {
             <RecentProjects />
             <Clients />
             <Experience />
+            <Certificate />
+            <Achievement />
             <Approach />
             <Footer />
           </div>
