@@ -13,11 +13,11 @@ const Approach = () => {
       <div className="my-20 flex flex-col lg:flex-row items-center justify-center w-full gap-4">
         {/* add des prop */}
         <Card
-          title="ACADEMY OF TECHNOLOGY"
+          title="ACADEMY OF TECHNOLOGY[UNDER MAKAUT/WBUT]"
           icon={<AceternityIcon order="B.TECH" />}
-          des={`BACHELORS OF TECHNOLOGY IN 
-            COMPUTER SCIENCE AND BUSINESS SYSTEM
-            CGPA[UPTO 7TH SEM]: 8.28
+          des={`BACHELOR OF TECHNOLOGY IN 
+            COMPUTER SCIENCE ENGINEERING AND BUSINESS SYSTEMS
+            CGPA: 8.28
             OCT 2021-MAY 2025`}
     >
           <CanvasRevealEffect
@@ -30,8 +30,8 @@ const Approach = () => {
           title="ST. PAUL`S ACADEMY"
           icon={<AceternityIcon order="ISC" />}
           des={`CLASS 12TH ISC WITH PCM
-            SCORE=86.25%
-            MAR 2019- FEB 2021`}
+            SCORE: 86.25%
+            MAR 2019-FEB 2021`}
         >
           <CanvasRevealEffect
             animationSpeed={3}
@@ -52,7 +52,7 @@ const Approach = () => {
           title="ST. PAUL`S ACADEMY"
           icon={<AceternityIcon order="ICSE" />}
           des={`CLASS 10TH ICSE 
-            SCORE = 87.4% 
+            SCORE: 87.4% 
             MAR 2015-FEB 2019`}
         >
           <CanvasRevealEffect

@@ -55,7 +55,7 @@ const Hero = () => {
             />
 
             <TextGenerateEffect
-              words="Hi! I&apos;m Ayishik Das, A final year Full Stack Developer based in India eager to work on exciting projects."
+              words="Hi! I&apos;m Ayishik Das, A New Grad Full Stack Engineer based in India eager to work on exciting ideas."
               className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl"
             />
 

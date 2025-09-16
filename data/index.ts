@@ -135,7 +135,7 @@ export const workExperience = [
   {
     id: 2,
     title: "Member of Prayukti",
-    company: "Ingenium [Oct 2023 - Present]",
+    company: "Ingenium [Oct 2023 - May 2025]",
     desc: "Review different technical writings on different CS topics written by other writers and share feedback.",
     className: "md:col-span-2", 
     thumbnail: "/exp2.svg",
@@ -151,8 +151,8 @@ export const workExperience = [
   {
     id: 4,
     title: "Co-Founder and CP Lead",
-    company: "Resourcio Community [Dec 2022 - Present]",
-    desc: "Created and running a tech community with over 2000 members.",
+    company: "Resourcio Community [Dec 2022 - May 2025]",
+    desc: "Created and ran a tech community with over 2000 members. Did various events and raised funds for them. ",
     className: "md:col-span-2",
     thumbnail: "/exp4.svg",
   },
