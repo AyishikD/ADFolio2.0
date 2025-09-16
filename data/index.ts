@@ -3,6 +3,7 @@ export const navItems = [
   { name: "Projects", link: "#projects" },
   { name: "Tech-Stack", link: "#tech-stack" },
   { name: "Education", link: "#education" },
+  { name: "Certificate", link: "#certificates"},
   { name: "Contact", link: "#contact" },
 ];
 
@@ -89,19 +90,35 @@ export const projects = [
   },
   {
     id: 3,
-    title: "ADeditor- Versatile code editor",
-    des: "ADeditor is a versatile online code editor built using React, Tailwind CSS, and Judge0 API. It empowers developers to compile and run code in over 8 languages, with options for customization through 10+ themes. ",
-    img: "/p3.jpg",
-    github: "https://github.com/AyishikD/ADeditor",
-    link: "https://adeditor.vercel.app/",
+    title: "PayP: Payment Platform API",
+    des: "This project is a payment architecture based on UPI architecture, designed to accept payments and send them. It includes core features such as secure user accounts, balance management, transaction logs, and a lockout mechanism for failed login attempts. It provides a great alternative to Razorpay or Stripe for development since it completely works like UPI. ",
+    img: "/proj1.jpg",
+    github: "https://github.com/AyishikD/PayP",
+    link: "https://www.postman.com/mission-geologist-4118891/payp/collection/za1hjme/routes-payp",
   },
   {
     id: 4,
     title: "Shopify- Full stack E-Commerce Platform",
-    des: "hopify is a modern and fully-featured e-commerce platform built using Next.js, Sanity, and Shadcn/UI.",
+    des: "Shopify is a modern and fully-featured e-commerce platform built using Next.js, Sanity, and Shadcn/UI.",
     img: "/p4.jpg",
     github: "https://github.com/AyishikD/shopify",
     link: "https://shopify-silk.vercel.app/",
+  },
+  {
+    id: 5,
+    title: "Crux - A High-Performance Command Line Tool",
+    des: "Crux is a lightweight, high-performance command line tool designed to provide users with powerful utilities while keeping it simple, efficient, and fast. Crux is designed to be easily extensible and ideal for users looking for a fast and flexible command-line solution. ",
+    img: "/img4.jpg",
+    github: "https://github.com/AyishikD/crux",
+    link: "https://github.com/AyishikD/crux",
+  },
+  {
+    id: 6,
+    title: "MyShell - A Custom Linux Terminal Shell",
+    des: "MyShell is a lightweight, custom-built terminal shell written in C. It replicates several core features of standard Linux shells like Bash, including command execution, piping, redirection, background jobs, and more — all in a colorful and interactive interface. It feels like you`re using your own shell but in a more simplistic manner with cool colors and extended functionality. ",
+    img: "/shell1.jpg",
+    github: "https://github.com/AyishikD/myshell",
+    link: "https://github.com/AyishikD/myshell",
   },
 ];
 
