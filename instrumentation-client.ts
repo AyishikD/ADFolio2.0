@@ -26,9 +26,8 @@ Sentry.init({
       maskAllText: true,
       blockAllMedia: true,
     }),
-    Sentry.feedbackIntegration({
-      // Additional SDK configuration goes in here, for example:
-      colorScheme: "dark",
-    }),
   ],
 });
+
+// Lets Sentry trace App Router navigations.
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;

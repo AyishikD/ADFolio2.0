@@ -2,114 +2,335 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* ---------- The film's palette and frame ---------- */
+:root {
+  --ground: #07090c;
+  --ink: #e9edf1;
+  --steel: #8fa3b5;
+  --amber: #e8a33d;
+  --flashback: #cbb89a;
+  --call-ground: #0b121a;
+  --origins-ground: #0b0a09;
+  --post-ground: #050608;
+
+  /* Letterbox bar height: 2.39:1 inside the viewport, clamped. */
+  --bar: clamp(56px, calc((100vh - 100vw / 2.39) / 2), 150px);
+  --gutter: clamp(20px, 5vw, 96px);
+}
+
+@media (max-width: 767px) {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-
-    --radius: 0.5rem;
-
-    --chart-1: 12 76% 61%;
-
-    --chart-2: 173 58% 39%;
-
-    --chart-3: 197 37% 24%;
-
-    --chart-4: 43 74% 66%;
-
-    --chart-5: 27 87% 67%;
-  }
-
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --bar: 48px;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border !scroll-smooth;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  button {
-    @apply active:outline-none;
+html {
+  background: var(--ground);
+  color: var(--ink);
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  font-family: var(--font-display), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+html[data-intro] body {
+  overflow: hidden;
+}
+
+/* Elements that animate in hide only once JS is confirmed; no JS, no hidden content. */
+.js .fx {
+  opacity: 0;
+}
+
+/* ---------- Scenes ---------- */
+.scene {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: calc(var(--bar) + 2vh) var(--gutter) var(--bar);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.scene-inner {
+  position: relative;
+  width: 100%;
+  max-width: 1728px;
+  margin: 0 auto;
+}
+
+.cam {
+  position: relative;
+  will-change: transform;
+}
+
+.flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(232, 163, 61, 0.55), rgba(232, 163, 61, 0.18) 45%, rgba(232, 163, 61, 0) 75%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.light {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* ---------- Type roles ---------- */
+.kicker {
+  font-family: var(--font-mono), monospace;
+  font-weight: 500;
+  font-size: clamp(13px, 1.1vw, 20px);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+.mono {
+  font-family: var(--font-mono), monospace;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.numeral {
+  font-weight: 200;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.title-caps {
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+/* ---------- Film grain over everything ---------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 10%); }
+  80% { transform: translate(-15%, 0); }
+  90% { transform: translate(10%, 5%); }
+}
+
+/* ---------- Scene-selection nav: centred when it fits, scrolls when it overflows ---------- */
+.scene-nav > :first-child {
+  margin-left: auto;
+}
+.scene-nav > :last-child {
+  margin-right: auto;
+}
+
+/* ---------- The nav floats on water ---------- */
+.buoy {
+  position: relative;
+  display: inline-block;
+  animation: buoy 5.6s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+  will-change: transform;
+}
+
+.buoy[data-active] {
+  animation-duration: 6.4s;
+}
+
+@keyframes buoy {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  28% { transform: translateY(-3px) rotate(-0.6deg); }
+  64% { transform: translateY(2.5px) rotate(0.5deg); }
+}
+
+/* The reflection: the label mirrored beneath the waterline, fading with depth, rippling slowly. */
+.buoy::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 3px;
+  color: inherit;
+  opacity: 0.16;
+  filter: blur(0.6px);
+  transform: scaleY(-1);
+  transform-origin: top;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 78%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 78%);
+  animation: ripple 4.8s ease-in-out infinite;
+  animation-delay: var(--r, 0s);
+}
+
+.buoy[data-active]::after {
+  opacity: 0.26;
+}
+
+@keyframes ripple {
+  0%, 100% { transform: scaleY(-1) skewX(0deg) scaleX(1); opacity: 0.16; }
+  35% { transform: scaleY(-0.94) skewX(5deg) scaleX(1.01); opacity: 0.22; }
+  70% { transform: scaleY(-1.03) skewX(-4deg) scaleX(0.99); opacity: 0.12; }
+}
+
+/* The waterline under the nav: a hairline that catches a slow drift of light. */
+.waterline {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: calc(50% + 1.1em);
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(143, 163, 181, 0.25) 20%, rgba(232, 163, 61, 0.55) 50%, rgba(143, 163, 181, 0.25) 80%, transparent 100%);
+  background-size: 220% 100%;
+  animation: waterline 11s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes waterline {
+  0% { background-position: 110% 0; }
+  100% { background-position: -110% 0; }
+}
+
+@media (max-width: 767px) {
+  .buoy::after,
+  .waterline {
+    display: none;
   }
 }
 
-@layer utilities {
-  .heading {
-    @apply font-bold text-4xl md:text-5xl text-center;
-  }
+/* ---------- Clapper slate stripes ---------- */
+.stripes {
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 18px, var(--ground) 18px 36px);
+  border: 2px solid var(--ink);
+}
 
-  .black-gradient {
-    background: linear-gradient(90deg, #161a31 0%, #06091f 100%);
+.stripes-wide {
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 40px, var(--ground) 40px 80px);
+}
+
+/* ---------- Links and buttons ---------- */
+.film-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-mono), monospace;
+  font-weight: 500;
+  font-size: clamp(12px, 0.95vw, 16px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel);
+  padding: 0.75em 1.2em;
+  border: 1px solid rgba(143, 163, 181, 0.35);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.film-link:hover,
+.film-link:focus-visible {
+  color: var(--ink);
+  border-color: var(--amber);
+  outline: none;
+}
+
+.film-link.amber {
+  color: var(--amber);
+  border-color: rgba(232, 163, 61, 0.5);
+}
+
+.film-link.amber:hover {
+  color: var(--ground);
+  background: var(--amber);
+}
+
+@media (pointer: coarse) {
+  .grain::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: grain-mobile 0.5s steps(1) infinite;
+  }
+  @keyframes grain-mobile {
+    0%, 100% { background-position: 0 0; }
+    20% { background-position: -40px 60px; }
+    40% { background-position: 70px -30px; }
+    60% { background-position: -90px -50px; }
+    80% { background-position: 30px 90px; }
   }
 }
 
-
-
-@layer base {
-  * {
-    @apply border-border;
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .grain {
+    display: none;
   }
-  body {
-    @apply bg-background text-foreground;
+  .buoy,
+  .buoy::after,
+  .waterline {
+    animation: none;
   }
+  .js .fx {
+    opacity: 1;
+  }
+  .flash {
+    display: none;
+  }
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--ground);
+}
+
+/* ---------- Intro overlay: only when this session plays it ---------- */
+html:not([data-intro]) .intro {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
